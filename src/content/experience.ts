@@ -6,11 +6,12 @@ export type ArtifactSlug =
   | "my-voice"
   | "only-you";
 
-export type Observation = {
+export type DetailPanel = {
+  id: "cover" | "little-things" | "admire" | "memory" | "humour" | "future";
   number: string;
-  title: string;
-  body: string;
-  closing: string;
+  heading: string;
+  purpose: string;
+  message: string;
 };
 
 export const experience = {
@@ -67,18 +68,16 @@ export const experience = {
     physicalNote: "I’ll look after you, make time for you, and be there when you need me. I’ll plan the dates, take care of the little things, and make sure you know you’re appreciated. You can count on me.",
   },
   details: {
-    title: "The Details",
-    heading: "I notice more than I say.",
-    subtitle: "A few things that belong here without pretending to tell the whole story.",
-    observations: [
-      { number: "I", title: "The first date", body: "An escape room was a good place to start: something to work out together, and no ordinary first-date script.", closing: "I’m glad that was ours." },
-      { number: "II", title: "The time since", body: "About two years can hold a lot without needing to turn every moment into a milestone.", closing: "The ordinary time counts too." },
-      { number: "III", title: "What I notice", body: "I don’t always say every thought out loud. That doesn’t mean the details pass me by.", closing: "The specific list is in the book you’re holding." },
-      { number: "IV", title: "Why I made this", body: "I wanted to make something with my own hands instead of finding something ready-made.", closing: "The effort is part of the point." },
-      { number: "V", title: "Still learning", body: "There are still things I get to learn about you. I think that is a good thing.", closing: "I’m paying attention." },
-      { number: "VI", title: "What stays ours", body: "Not every good detail belongs on a website. Some things are better kept between the two people who were there.", closing: "You know the ones." },
-    ] satisfies Observation[],
-    closing: "There’s more. These are simply the ones that belong here.",
+    label: "The accordion booklet",
+    footer: "Private edition · six panels",
+    panels: [
+      { id: "cover", number: "I", heading: "THE DETAILS", purpose: "Cover", message: "Your opening message will appear here." },
+      { id: "little-things", number: "II", heading: "THE LITTLE THINGS", purpose: "Something small I notice about her", message: "Your final wording will appear here." },
+      { id: "admire", number: "III", heading: "WHAT I ADMIRE", purpose: "A quality I respect", message: "Your final wording will appear here." },
+      { id: "memory", number: "IV", heading: "A MEMORY", purpose: "A meaningful experience together", message: "Your final wording will appear here." },
+      { id: "humour", number: "V", heading: "YOUR HUMOUR", purpose: "Something I appreciate about how funny she is", message: "Your final wording will appear here." },
+      { id: "future", number: "VI", heading: "THE FUTURE", purpose: "My thoughts about a possible long-term future together", message: "Your final wording will appear here." },
+    ] satisfies DetailPanel[],
   },
   voice: {
     title: "My Voice",

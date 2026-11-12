@@ -2,9 +2,9 @@
 
 import { useRef, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { experience } from "@/content/experience";
-import { GoldLink } from "@/components/ui/GoldButton";
+import { easeEditorial, motionDurations } from "@/lib/motion";
 
 const paperTones = ["paper-warm", "paper-pale", "paper-aged", "paper-clean", "paper-warm", "paper-pale"];
 
@@ -12,15 +12,16 @@ export function DetailsCollection() {
   const viewportRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
   const reduceMotion = useReducedMotion();
-  const entries = experience.details.observations;
-  const lastIndex = entries.length + 1;
+  const panels = experience.details.panels;
+  const lastIndex = panels.length - 1;
 
   function go(next: number) {
     const clamped = Math.max(0, Math.min(lastIndex, next));
     const viewport = viewportRef.current;
     const panel = viewport?.querySelector<HTMLElement>(`[data-booklet-page="${clamped}"]`);
     if (viewport && panel) {
-      viewport.scrollTo({ left: panel.offsetLeft - 16, behavior: reduceMotion ? "auto" : "smooth" });
+      const centeredLeft = panel.offsetLeft - (viewport.clientWidth - panel.offsetWidth) / 2;
+      viewport.scrollTo({ left: centeredLeft, behavior: reduceMotion ? "auto" : "smooth" });
     }
   }
 
@@ -28,9 +29,11 @@ export function DetailsCollection() {
     const viewport = viewportRef.current;
     if (!viewport) return;
     const panels = Array.from(viewport.querySelectorAll<HTMLElement>("[data-booklet-page]"));
+    const viewportCenter = viewport.scrollLeft + viewport.clientWidth / 2;
     const active = panels.reduce(
       (closest, panel, panelIndex) => {
-        const distance = Math.abs(panel.offsetLeft - viewport.scrollLeft - 16);
+        const panelCenter = panel.offsetLeft + panel.offsetWidth / 2;
+        const distance = Math.abs(panelCenter - viewportCenter);
         return distance < closest.distance ? { index: panelIndex, distance } : closest;
       },
       { index, distance: Number.POSITIVE_INFINITY },
@@ -42,44 +45,51 @@ export function DetailsCollection() {
     <section className="details-experience" aria-label="The Details accordion booklet">
       <div className="details-accordion-viewport" ref={viewportRef} onScroll={handleScroll}>
         <div className="details-accordion-track">
-          <header className="details-booklet-cover" data-booklet-page="0">
-            <span>The accordion booklet</span>
+          <motion.header
+            className="details-booklet-cover"
+            data-booklet-page="0"
+            aria-current={index === 0 ? "step" : undefined}
+            animate={{ opacity: index === 0 ? 1 : 0.78 }}
+            transition={{ duration: reduceMotion ? 0 : motionDurations.card, ease: easeEditorial }}
+          >
+            <span>{experience.details.label}</span>
             <div>
-              <h1>{experience.details.title}</h1>
-              <p>{experience.details.heading}</p>
+              <span className="details-booklet-cover__purpose">{panels[0].purpose}</span>
+              <h1>{panels[0].heading}</h1>
+              <p>{panels[0].message}</p>
             </div>
-            <small>{experience.details.subtitle}</small>
-          </header>
+            <small>{experience.details.footer}</small>
+          </motion.header>
 
-          {entries.map((entry, entryIndex) => (
-            <article
-              key={entry.number}
-              data-booklet-page={entryIndex + 1}
-              className={`detail-note detail-note--accordion ${paperTones[entryIndex % paperTones.length]}`}
-            >
-              <div className="detail-note__number">{entry.number}</div>
-              <div className="detail-note__rule" />
-              <h2>{entry.title}</h2>
-              <p className="detail-note__body">{entry.body}</p>
-              <p className="detail-note__emphasis">{entry.closing}</p>
-              <span className="detail-note__edition">Page {entryIndex + 1} of {entries.length}</span>
-            </article>
-          ))}
-
-          <aside className="details-closing details-closing--accordion" data-booklet-page={lastIndex}>
-            <span className="details-closing__mark">VI</span>
-            <p>{experience.details.closing}</p>
-            <GoldLink href="/collection">Back to the box</GoldLink>
-          </aside>
+          {panels.slice(1).map((panel, panelIndex) => {
+            const pageIndex = panelIndex + 1;
+            return (
+              <motion.article
+                key={panel.id}
+                data-booklet-page={pageIndex}
+                aria-current={index === pageIndex ? "step" : undefined}
+                className={`detail-note detail-note--accordion ${paperTones[panelIndex % paperTones.length]}`}
+                animate={{ opacity: index === pageIndex ? 1 : 0.78 }}
+                transition={{ duration: reduceMotion ? 0 : motionDurations.card, ease: easeEditorial }}
+              >
+                <div className="detail-note__number">{panel.number}</div>
+                <div className="detail-note__rule" />
+                <p className="detail-note__purpose">{panel.purpose}</p>
+                <h2>{panel.heading}</h2>
+                <p className="detail-note__body">{panel.message}</p>
+                <span className="detail-note__edition">Panel {pageIndex + 1} of {panels.length}</span>
+              </motion.article>
+            );
+          })}
         </div>
       </div>
 
       <div className="details-booklet-controls">
-        <button type="button" onClick={() => go(index - 1)} disabled={index === 0} aria-label="Previous observation">
+        <button type="button" onClick={() => go(index - 1)} disabled={index === 0} aria-label="Previous panel">
           <ArrowLeft aria-hidden="true" />
         </button>
-        <span aria-live="polite">{index + 1} of {lastIndex + 1}</span>
-        <button type="button" onClick={() => go(index + 1)} disabled={index === lastIndex} aria-label="Next observation">
+        <span aria-live="polite">Panel {index + 1} of {panels.length}</span>
+        <button type="button" onClick={() => go(index + 1)} disabled={index === lastIndex} aria-label="Next panel">
           <ArrowRight aria-hidden="true" />
         </button>
       </div>

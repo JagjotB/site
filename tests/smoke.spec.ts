@@ -64,8 +64,10 @@ test("all six public NFC destinations support meaningful direct entry", async ({
 
   await page.goto("/collection/the-details");
   await expect(page.getByText("The accordion booklet")).toBeVisible();
-  await page.getByRole("button", { name: "Next observation" }).click();
-  await expect(page.getByRole("heading", { name: "The first date" })).toBeVisible();
+  await expect(page.locator("[data-booklet-page]")).toHaveCount(6);
+  await page.getByRole("button", { name: "Next panel" }).click();
+  await expect(page.locator(".details-booklet-controls > span")).toHaveText("Panel 2 of 6");
+  await expect(page.getByRole("heading", { name: "THE LITTLE THINGS" })).toBeVisible();
 
   await page.goto("/collection/my-voice");
   await expect(page.getByText("The sound-wave plaque")).toBeVisible();
@@ -82,6 +84,32 @@ test("The Archive enables only a configured album link", async ({ page }) => {
     "https://drive.google.com/drive/folders/1kcw2uINgindiSE0dr1f_kh4-2vthldg3?usp=drive_link",
   );
   await expect(album).toHaveAttribute("target", "_blank");
+});
+
+test("The Details presents the approved six-panel accordion", async ({ page }, testInfo) => {
+  await page.goto("/collection/the-details");
+  await expect(page.locator("[data-booklet-page]")).toHaveCount(6);
+  await expect(page.getByRole("heading", { name: "THE DETAILS" })).toBeVisible();
+  await expect(page.getByText("Panel 1 of 6", { exact: true })).toBeVisible();
+
+  const headings = ["THE LITTLE THINGS", "WHAT I ADMIRE", "A MEMORY", "YOUR HUMOUR", "THE FUTURE"];
+  const next = page.getByRole("button", { name: "Next panel" });
+  for (const [panelIndex, heading] of headings.entries()) {
+    await next.click();
+    const counter = page.locator(".details-booklet-controls > span");
+    await expect(counter).toHaveText(`Panel ${panelIndex + 2} of 6`);
+    await expect(page.locator(`[data-booklet-page="${panelIndex + 1}"]`)).toHaveAttribute("aria-current", "step");
+    await expect(page.getByRole("heading", { name: heading })).toBeVisible();
+    if (panelIndex === 0) {
+      await page.waitForTimeout(650);
+      await expect(counter).toHaveText("Panel 2 of 6");
+      await page.screenshot({ path: testInfo.outputPath(`details-${testInfo.project.name}.png`), fullPage: true });
+    }
+  }
+
+  await expect(next).toBeDisabled();
+  await page.getByRole("button", { name: "Previous panel" }).click();
+  await expect(page.getByText("Panel 5 of 6", { exact: true })).toBeVisible();
 });
 
 test("voice message reports real copy and share outcomes", async ({ page }) => {
@@ -184,8 +212,9 @@ test("reduced motion preserves core interactions", async ({ page }) => {
   await page.goto("/collection/the-way-out");
   await expect(page.getByText("Our first date was an escape room.")).toBeVisible();
   await page.goto("/collection/the-details");
-  await page.getByRole("button", { name: "Next observation" }).click();
-  await expect(page.getByRole("heading", { name: "The first date" })).toBeVisible();
+  await page.getByRole("button", { name: "Next panel" }).click();
+  await expect(page.locator(".details-booklet-controls > span")).toHaveText("Panel 2 of 6");
+  await expect(page.getByRole("heading", { name: "THE LITTLE THINGS" })).toBeVisible();
 });
 
 test("direct links refresh and browser back remain reliable", async ({ page }) => {

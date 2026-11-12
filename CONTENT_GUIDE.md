@@ -6,7 +6,7 @@ Recipient-facing wording lives in `src/content/experience.ts`. Optional media an
 
 Review these fields in `experience.ts`:
 
-1. `details.observations`: replace the provisional, fact-based entries with six true observations when ready.
+1. `details.panels[*].message`: replace the six neutral placeholders with the final approved wording when ready.
 2. `promise.paragraphs`, `promise.signature`, and `promise.physicalNote`: make sure the wording sounds natural when spoken by you.
 3. `voice`: keep the invitation quiet and free of any pressure to listen during the presentation.
 4. Invitation and final-reveal wording only if the physical choreography changes.
@@ -25,18 +25,28 @@ The application links to the folder; it does not upload, copy, or synchronize ph
 
 ## Details booklet
 
-Each entry uses one readable observation:
+Chapter 04 always contains exactly six accordion panels. Their approved headings and purposes live in `experience.details.panels`; normally you only need to replace each `message` value:
 
 ```ts
 {
+  id: "little-things",
   number: "II",
-  title: "A short title",
-  body: "One or two true, concise sentences.",
-  closing: "A brief final line."
+  heading: "THE LITTLE THINGS",
+  purpose: "Something small I notice about her",
+  message: "Replace this placeholder with the final message."
 }
 ```
 
-The web entries should complement the handmade booklet rather than copy it word for word. Keep six entries so the digital accordion maintains its intended rhythm.
+Edit these six fields later without changing the component or layout:
+
+1. `experience.details.panels[0].message` — cover
+2. `experience.details.panels[1].message` — the little things
+3. `experience.details.panels[2].message` — what I admire
+4. `experience.details.panels[3].message` — a memory
+5. `experience.details.panels[4].message` — your humour
+6. `experience.details.panels[5].message` — the future
+
+Keep all six panel objects so the physical and digital accordion remain aligned. The website wording should complement the handmade booklet rather than duplicate it automatically.
 
 ## Voice recording: for later
 
