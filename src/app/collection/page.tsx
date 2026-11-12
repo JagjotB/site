@@ -40,7 +40,7 @@ export default function CollectionPage() {
         </section>
 
         <footer className="collection-footer">
-          <span>It started at Weldon.</span>
+          <span>Made by hand. Opened one piece at a time.</span>
           <span>Everything here was made for you.</span>
         </footer>
       </PageTransition>

@@ -222,12 +222,12 @@ export function VoiceExperience({ recording, transcript, waveform, developmentFi
         <motion.section key="invitation" className="voice-keepsake" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: reduceMotion ? 0 : 0.6 }} aria-label="A private message to keep">
           <div className="voice-keepsake__plate">
             <header className="voice-keepsake__identity">
-              <span>The waveform plaque</span>
+              <span>The sound-wave plaque</span>
               <h1>{experience.voice.title}</h1>
               <p>{experience.voice.heading}</p>
             </header>
             <Waveform />
-            <strong>For a quiet minute.</strong>
+            <strong>For a quieter moment.</strong>
           </div>
           <div className="voice-keepsake__copy">
             <p>{experience.voice.lead}</p>

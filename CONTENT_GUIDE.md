@@ -1,101 +1,85 @@
 # Content and Media Guide
 
-Recipient-facing wording lives in `src/content/experience.ts`. Optional media and feature availability live in `src/content/assets.ts`. Undefined media paths activate complete, recipient-safe experiences; there are no broken images, dead play buttons, or developer placeholders.
+Recipient-facing wording lives in `src/content/experience.ts`. Optional media and external destinations live in `src/content/assets.ts`. Undefined fields activate composed, recipient-safe states—never broken controls or development notices.
 
 ## Before the presentation
 
-Personalize these fields in `experience.ts`:
+Review these fields in `experience.ts`:
 
-1. `identity.recipientName` if the name should be used later.
-2. `details.observations` with six real, concise observations.
-3. `promise.body`, `promise.signature`, and `promise.physicalNote` in your own voice.
+1. `details.observations`: replace the provisional, fact-based entries with six true observations when ready.
+2. `promise.paragraphs`, `promise.signature`, and `promise.physicalNote`: make sure the wording sounds natural when spoken by you.
+3. `voice`: keep the invitation quiet and free of any pressure to listen during the presentation.
 4. Invitation and final-reveal wording only if the physical choreography changes.
 
-Keep details specific without inventing facts. The established shared context is Weldon Library, Western University, and approximately two years of dating. Avoid premature declarations, possessive language, or the final girlfriend question.
+Do not add invented habits, inside jokes, travel memories, or feelings attributed to the recipient. Avoid premature declarations, possessive language, and the final girlfriend question.
 
-## Tomorrow artwork
+## The Archive shared album
 
-Recommended file:
-
-- Path: `public/media/future/future-memory.webp`
-- Format: WebP or AVIF, with a high-quality JPEG fallback if preferred.
-- Composition: portrait, ideally 4:5 or 3:4.
-- Recommended dimensions: 1600 × 2000 px or similar.
-- Target size: under 1.2 MB after export.
-
-The intended scene is an illustrative future memory: a couple viewed from behind on an understated Italian lakeside terrace at golden hour, with a book on a nearby table as a quiet reference to Weldon. Do not use a stock image of unrelated people.
-
-After adding the file, set:
+Create a real shared Google Photos album and paste its public share URL into `src/content/assets.ts`:
 
 ```ts
-futureStill: "/media/future/future-memory.webp",
+sharedAlbumUrl: "https://photos.app.goo.gl/your-real-share-code",
 ```
 
-The built-in SVG remains the sketch layer. To replace it, add a portrait WebP/AVIF at `public/media/future/future-sketch.webp` and set `futureSketch`. Keep similar framing between both layers for a convincing wipe.
+Until this is configured, The Archive intentionally shows that its first frame is waiting. The application neither creates nor synchronizes an album. Confirm the link opens in a private/incognito browser before presentation so it does not depend on your signed-in Google session.
 
-Optional future animation and AR fields are already typed. Leave `featureAvailability.futureAR` false until a real target and animation exist. AR is never required for the chapter.
+## Details booklet
+
+Each entry uses one readable observation:
+
+```ts
+{
+  number: "II",
+  title: "A short title",
+  body: "One or two true, concise sentences.",
+  closing: "A brief final line."
+}
+```
+
+The web entries should complement the handmade booklet rather than copy it word for word. Keep six entries so the digital accordion maintains its intended rhythm.
 
 ## Voice recording: for later
 
-The voice artifact first invites the recipient to keep the page. Sharing or copying preserves the URL only; it does not promise an offline copy. Listening is deliberately secondary and appears only after a recording path is configured.
-
-Recommended recording:
+Recommended asset:
 
 - Path: `public/media/voice/private-recording.mp3`
-- Format: MP3 for broad compatibility; AAC in M4A is also suitable for modern iPhone and Android browsers.
-- Duration: roughly 20–40 seconds.
-- Audio: mono or stereo, 44.1/48 kHz, 128–192 kbps.
+- Format: MP3 for broad compatibility; AAC in M4A is also suitable for current iPhone and Android browsers.
+- Duration: approximately 20–40 seconds.
+- Audio: natural, close, conversational; no music is required.
 - Target size: under 2 MB.
-- Delivery: natural, close, and conversational; no background music is necessary.
 
-Set:
+Configure it in `src/content/assets.ts`:
 
 ```ts
 voiceRecording: "/media/voice/private-recording.mp3",
 ```
 
-The page then exposes “Or listen when you’re ready,” followed by a real native-audio player. Playback never autostarts.
+The page then adds the secondary `Listen When You’re Ready` action and the genuine player. Playback never autostarts. Sharing or copying preserves the page URL; it does not download or guarantee offline access.
 
-### Matching the physical waveform
+### Match the physical waveform
 
-If the plaque is generated from the final audio, export a simplified set of 30–80 normalized amplitudes (8–100) and add them to `voiceWaveform`:
+After the recording is final, export 30–80 normalized waveform amplitudes from 8–100 and set:
 
 ```ts
 voiceWaveform: [18, 24, 36, 62, 45, 78, 54, 31],
 ```
 
-This gives the idle player a waveform derived from the recording. While audio plays, the canvas responds to the real audio signal through Web Audio when supported. Without the array, the keepsake invitation uses a clearly decorative motif rather than claiming to show real audio.
+Use the same audio-derived profile for the printed plaque where practical. Without this data, the invitation displays a decorative waveform and never claims it represents the recording.
 
 ### Transcript
 
-Only set `voiceTranscript` after the recording is final and the words match it. Do not publish the provisional script as a transcript. Keep captions concise and verbatim:
+Only publish a transcript after it matches the final recording exactly:
 
 ```ts
 voiceTranscript: "Exact words from the final recording…",
 ```
 
-Do not say “I love you,” assume a response to the proposal, reference a listening date, or include the final question. The recording should still make sense months later.
+Do not assume the recipient’s answer, mention a specific listening date, say “I love you,” or include the final question. The recording should remain natural months later.
 
-## Details cards
+## Safe media behaviour
 
-Each item supports:
-
-```ts
-{
-  number: "II",
-  category: "A TINY HABIT",
-  label: "Short editorial title",
-  body: "One or two honest sentences.",
-  emphasis: "A brief closing line."
-}
-```
-
-The website observations should complement, rather than duplicate, the accordion booklet word for word.
-
-## Safe media behavior
-
-- Missing paths are valid and do not fail the build.
-- Use root-relative public paths beginning with `/`.
-- Test the exact production URL on iPhone Safari and Android Chrome after adding media.
-- Keep audio hosted at the same stable route for the NFC keepsake to remain useful.
-- Normal webpage access does not guarantee offline playback.
+- Missing optional fields are valid and do not fail the build.
+- Public media paths begin with `/` and resolve from `public/`.
+- Keep the deployment, domain, and audio path online for the plaque link to remain useful.
+- Test the exact production URLs on iPhone Safari and Android Chrome after adding content.
+- Do not store the physical letter in this repository.

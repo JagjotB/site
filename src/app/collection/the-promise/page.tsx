@@ -3,7 +3,7 @@ import { ExperienceShell } from "@/components/layout/ExperienceShell";
 import { CollectionNavigation } from "@/components/layout/CollectionNavigation";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { VisitedMarker } from "@/components/layout/VisitedMarker";
-import { PromiseShell } from "@/components/experiences/PromiseShell";
+import { PromiseLetter } from "@/components/experiences/PromiseLetter";
 
 export const metadata: Metadata = { title: "03 — The Promise" };
 
@@ -14,7 +14,7 @@ export default function PromisePage() {
       <CollectionNavigation />
       <PageTransition>
         <div className="promise-layout">
-          <PromiseShell />
+          <PromiseLetter />
         </div>
       </PageTransition>
     </ExperienceShell>

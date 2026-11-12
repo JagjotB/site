@@ -1,6 +1,6 @@
 export type ArtifactSlug =
-  | "tomorrow"
-  | "in-focus"
+  | "the-archive"
+  | "the-way-out"
   | "the-promise"
   | "the-details"
   | "my-voice"
@@ -8,102 +8,102 @@ export type ArtifactSlug =
 
 export type Observation = {
   number: string;
-  category: string;
-  label: string;
+  title: string;
   body: string;
-  emphasis: string;
+  closing: string;
 };
 
 export const experience = {
   identity: {
     title: "The Art of Us",
     archiveTitle: "The Art of Us",
-    edition: "Private edition · one of one",
-    collectionCode: "Six things, made by hand",
+    edition: "Private Edition · 01/01",
+    collectionCode: "Six pieces, made by hand",
     recipientName: undefined as string | undefined,
     dedication: "I made this for you.",
   },
   invitation: {
-    prompt: "You have the key.",
-    prelude: "Start with the key.",
-    unlockedTitle: "I thought I’d do this properly.",
-    unlockedBody: "There’s something I made for you.",
-    physicalCue: "The key in your hands opens the rest.",
+    supporting: "Six pieces. Each with something of its own to tell you.",
+    action: "View the Collection",
   },
   collection: {
     heading: "Six things I made.",
-    introduction: "Pick up whichever one you want first. Each has something else inside it.",
-    scanInstruction: "Hold your phone near the hidden tag on each piece.",
-    reservedLabel: "This one opens differently.",
+    introduction: "Pick up whichever one you want first. Each piece has another layer waiting for you.",
+    scanInstruction: "The hidden tag on each object opens its own chapter.",
+    reservedLabel: "This one opens from the credential.",
   },
   artifacts: [
-    { number: "01", slug: "tomorrow" as const, medium: "Photographic print", cue: "Turn it over", title: "Tomorrow", subtitle: "Somewhere I hope we get to go." },
-    { number: "02", slug: "in-focus" as const, medium: "Mechanical iris", cue: "Rotate the ring", title: "In Focus", subtitle: "Where this started." },
-    { number: "03", slug: "the-promise" as const, medium: "Shell container", cue: "Unscrew the base", title: "The Promise", subtitle: "What I mean when I say I’ll be there." },
-    { number: "04", slug: "the-details" as const, medium: "Accordion booklet", cue: "Open the folds", title: "The Details", subtitle: "The small stuff I keep noticing." },
-    { number: "05", slug: "my-voice" as const, medium: "Waveform plaque", cue: "Keep this one", title: "My Voice", subtitle: "Not for right now." },
-    { number: "06", slug: "only-you" as const, medium: "Black credential", cue: "Not in the index", title: "Only You", subtitle: "This one opens differently." },
+    { number: "01", slug: "the-archive" as const, medium: "Miniature camera", cue: "Begin the album", title: "The Archive", subtitle: "For the moments worth keeping." },
+    { number: "02", slug: "the-way-out" as const, medium: "Architectural iris", cue: "See the full plan", title: "The Way Out", subtitle: "Our first date had an exit to find." },
+    { number: "03", slug: "the-promise" as const, medium: "Shell and note", cue: "Read what I mean", title: "The Promise", subtitle: "The part I intend to show through actions." },
+    { number: "04", slug: "the-details" as const, medium: "Accordion booklet", cue: "Open the folds", title: "The Details", subtitle: "The things I notice, even when I don’t say them." },
+    { number: "05", slug: "my-voice" as const, medium: "Sound-wave plaque", cue: "Keep this one", title: "My Voice", subtitle: "For a quieter moment." },
+    { number: "06", slug: "only-you" as const, medium: "Private credential", cue: "Not in the index", title: "Only You", subtitle: "This one opens differently." },
   ],
-  tomorrow: {
-    title: "Tomorrow.",
-    heading: "Lake Como is on the list.",
-    introduction: "No itinerary yet. Just a view, the two of us, and a book nearby for where this all started.",
-    reveal: "We should make this one real someday.",
-    closing: "No rush. It’s just a good thought.",
-    imageAlt: "An imagined future lakeside terrace, presented as a memory still waiting to happen",
+  archive: {
+    title: "The Archive",
+    lead: "For the moments worth keeping.",
+    body: "We don’t have much of a photo collection yet. I thought we should start one.",
+    action: "Open Our Album",
+    emptyTitle: "The first frame is still waiting.",
+    emptyBody: "When we have one worth adding, this is where our album begins.",
   },
-  inFocus: {
-    title: "In Focus.",
-    prelude: "Weldon, of all places.",
-    heading: "I’m glad it was Weldon.",
-    admiration: "Not exactly where I expected this to start. Still glad it did.",
+  wayOut: {
+    title: "The Way Out",
+    lead: "Our first date was an escape room.",
+    body: "We spent it trying to find our way out.",
+    closing: "Now some of my favourite time with you is when we get to shut everything else out for a while. No rush, no distractions. Just us.",
+    revealAction: "See the whole plan",
+    resetAction: "Return to the fragment",
   },
   promise: {
-    label: "The shell",
-    title: "The Promise.",
-    subtitle: "What I mean by showing up.",
-    body: "I want to be someone you can count on. Someone who makes time for you, pays attention, looks after the details, and shows up when it matters. Not just when it’s easy, but when you need me.",
+    title: "The Promise",
+    lead: "What I mean when I say I’ll be there.",
+    paragraphs: [
+      "I’ll make time for you, even when life gets busy. I’ll plan the dates, pay attention to the little things, and be there when you need me.",
+      "I won’t pretend I’ll always get everything right. But I’ll listen, put in the effort, and make sure you know you’re appreciated.",
+    ],
     signature: "You can count on me.",
     physicalNote: "I’ll look after you, make time for you, and be there when you need me. I’ll plan the dates, take care of the little things, and make sure you know you’re appreciated. You can count on me.",
   },
   details: {
-    title: "The small stuff.",
+    title: "The Details",
     heading: "I notice more than I say.",
-    subtitle: "The things that are easy to miss if you aren’t paying attention.",
+    subtitle: "A few things that belong here without pretending to tell the whole story.",
     observations: [
-      { number: "I", category: "Weldon", label: "Where it started", body: "We met at Weldon. Of all the places on campus, I still like that it was there.", emphasis: "Ordinary, right up until it wasn’t." },
-      { number: "II", category: "The small stuff", label: "I notice", body: "I don’t always say every thought out loud. That doesn’t mean the details pass me by.", emphasis: "The good list is in the book you’re holding." },
-      { number: "III", category: "No occasion", label: "The regular days", body: "The ordinary time counts too. It doesn’t always need a reservation or a reason.", emphasis: "Sometimes it’s better that way." },
-      { number: "IV", category: "Still learning", label: "Two years in", body: "There are still things I get to learn about you. I think that’s a good thing.", emphasis: "I’m paying attention." },
-      { number: "V", category: "Just ours", label: "The jokes that don’t travel", body: "I’m not putting the good ones on a website. Some things can stay between us.", emphasis: "You know the ones." },
-      { number: "VI", category: "Next time", label: "An easy thought", body: "I’m already looking forward to whatever we decide to do next.", emphasis: "No grand plan required." },
+      { number: "I", title: "The first date", body: "An escape room was a good place to start: something to work out together, and no ordinary first-date script.", closing: "I’m glad that was ours." },
+      { number: "II", title: "The time since", body: "About two years can hold a lot without needing to turn every moment into a milestone.", closing: "The ordinary time counts too." },
+      { number: "III", title: "What I notice", body: "I don’t always say every thought out loud. That doesn’t mean the details pass me by.", closing: "The specific list is in the book you’re holding." },
+      { number: "IV", title: "Why I made this", body: "I wanted to make something with my own hands instead of finding something ready-made.", closing: "The effort is part of the point." },
+      { number: "V", title: "Still learning", body: "There are still things I get to learn about you. I think that is a good thing.", closing: "I’m paying attention." },
+      { number: "VI", title: "What stays ours", body: "Not every good detail belongs on a website. Some things are better kept between the two people who were there.", closing: "You know the ones." },
     ] satisfies Observation[],
-    closing: "There’s more. These are just six I could fit here.",
+    closing: "There’s more. These are simply the ones that belong here.",
   },
   voice: {
-    title: "My Voice.",
-    heading: "Not for right now.",
+    title: "My Voice",
+    heading: "For a quieter moment.",
     lead: "This one’s for later.",
-    body: "Keep it. Listen when you have a quiet minute to yourself.",
+    body: "Keep it for a quieter moment.",
     saveAction: "Keep This Message",
     copyAction: "Copy Link",
-    listenAction: "Or listen when you’re ready",
-    returnAction: "Return to the Collection",
+    listenAction: "Listen When You’re Ready",
+    returnAction: "Keep Exploring",
     savedFeedback: "Shared. Yours whenever you’re ready.",
     copiedFeedback: "Link copied. Yours whenever you’re ready.",
     copyFailure: "The link couldn’t be copied automatically. You can bookmark this page instead.",
-    unavailable: "I’m recording this in my own voice. It belongs here when it’s ready.",
+    unavailable: "Keep the plaque close. The recording will be here when it is ready.",
     transcriptLabel: "Read transcript",
   },
   final: {
-    label: "The last piece",
+    label: "Private Edition · 01/01",
     title: "Only You.",
-    prelude: "I left the important part out of the website.",
-    collectionLine: "It’s in the box, where it should be.",
+    prelude: "There is one part of this collection that was never meant to stay on a screen.",
+    collectionLine: "It is in the box, where it should be.",
     action: "Show me where",
     instruction: "Back to the box.",
     command: "Lift the tray.",
     detail: "There’s something underneath.",
-    closing: "I’ll let the letter take it from here.",
+    closing: "The rest is yours to discover.",
   },
 } as const;

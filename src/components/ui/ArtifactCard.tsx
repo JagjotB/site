@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowUpRight, Check } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import type { ArtifactSlug } from "@/content/experience";
+import { getVisited } from "@/lib/visited";
 import { ArtifactVisual } from "./ArtifactVisual";
 
 type Artifact = {
@@ -25,6 +27,12 @@ export function ArtifactCard({
   featured?: boolean;
 }) {
   const reduceMotion = useReducedMotion();
+  const [visited, setVisited] = useState(false);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setVisited(getVisited().has(artifact.slug)), 0);
+    return () => window.clearTimeout(timer);
+  }, [artifact.slug]);
 
   const body = (
     <motion.article
@@ -34,7 +42,7 @@ export function ArtifactCard({
     >
       <div className="artifact-card__topline">
         <span>{artifact.medium}</span>
-        <span>{artifact.cue}</span>
+        <span>{visited && !reserved ? <><Check size={11} aria-hidden="true" /> Seen</> : artifact.cue}</span>
       </div>
       <div className="artifact-card__visual">
         <ArtifactVisual slug={artifact.slug} />

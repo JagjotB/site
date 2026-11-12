@@ -1,27 +1,25 @@
 # Vercel Deployment
 
-## 1. Prepare the environment
+The production project currently uses `https://site-pink-ten-14.vercel.app` and is connected to `JagjotB/site`.
 
-Create a cryptographically random private-link token locally:
+## Environment
+
+Generate a private-link token locally:
 
 ```bash
 node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"
 ```
 
-Configure these Vercel environment variables for Production (and Preview only if you need private-route previewing):
+Configure these variables in Vercel Production (and Preview only when needed):
 
-| Variable | Example | Exposure |
+| Variable | Value | Exposure |
 | --- | --- | --- |
-| `PRIVATE_ACCESS_TOKEN` | a generated 43+ character token | Server only |
-| `NEXT_PUBLIC_SITE_URL` | `https://your-domain.example` | Public origin |
+| `PRIVATE_ACCESS_TOKEN` | A generated 43+ character token | Server only |
+| `NEXT_PUBLIC_SITE_URL` | `https://site-pink-ten-14.vercel.app` or the final custom domain | Public origin |
 
-`NEXT_PUBLIC_SITE_URL` must be an HTTPS origin with no path, query, or fragment. Never prefix the private token with `NEXT_PUBLIC_`.
+The site URL must be an HTTPS origin without a path, query, or fragment. Never prefix the private token with `NEXT_PUBLIC_`.
 
-## 2. Deploy
-
-Import the repository into Vercel. The project uses the standard Next.js commands and requires Node.js 22.13 or newer. Set the production domain before programming any NFC tags.
-
-Run locally before release:
+## Validate and deploy
 
 ```bash
 npm ci
@@ -29,38 +27,38 @@ npm run typecheck
 npm run lint
 npm run build
 npm run test:e2e
+git push origin main
 ```
 
-## 3. Verify production
+The connected Vercel project should build the push automatically. Confirm the deployment succeeded before programming tags.
 
-Check direct navigation and refresh for:
+## Verify production
+
+Open and refresh:
 
 - `/invite`
 - `/collection`
-- all five ordinary artifact routes
+- `/collection/the-archive`
+- `/collection/the-way-out`
+- `/collection/the-promise`
+- `/collection/the-details`
+- `/collection/my-voice`
 - `/access/YOUR_PRIVATE_TOKEN`
-- an invalid `/access/not-the-token` URL, which must return the designed not-found state
+- `/access/not-the-token` (must show the designed not-found state)
 
-Confirm `robots.txt` and page metadata remain `noindex`/`nofollow`, no analytics have been added, and no public link points to `/access/`.
+Also confirm the two legacy public URLs redirect, `robots.txt` and metadata remain `noindex`/`nofollow`, no analytics have been added, and no public page links to `/access/`.
 
-## 4. Generate NFC destinations
-
-With production environment variables available locally:
+## Generate NFC destinations
 
 ```bash
 npm run nfc:links
-```
-
-This prints Tags 01–06. Print the seventh destination only in a private terminal session:
-
-```bash
 npm run nfc:links -- --include-private
 ```
 
-Do not paste the Tag 07 output into documentation, issues, screenshots, analytics, or source control. The URL is unguessable, not authenticated; possession of the URL is sufficient to open it.
+The first command prints Tags 01–06. Run the private form only in a private terminal session. The seventh URL is unguessable, not authenticated; anyone with it can open the page.
 
-## 5. Long-term voice access
+## Long-term access
 
-The waveform plaque points to a normal web route. Keep the Vercel project, domain, and configured audio file online for the link to continue working. A browser page is not an offline archive. If the domain changes, rewrite and retest all seven tags.
+Keep the Vercel project, domain, shared album, and configured audio file online for these keepsakes to work over time. A normal webpage does not guarantee offline audio. If the domain changes, rewrite and retest all seven tags.
 
-Deployment is complete only after the production build and direct links are verified on real mobile devices. Physical NFC behavior must be tested with the final assembled objects; automated browser tests cannot validate radio performance.
+Automated browser checks cannot validate radio behaviour. Deployment is complete only after the production build, direct routes, and final assembled NFC objects have been checked on real phones.

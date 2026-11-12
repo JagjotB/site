@@ -43,7 +43,7 @@ export function DetailsCollection() {
       <div className="details-accordion-viewport" ref={viewportRef} onScroll={handleScroll}>
         <div className="details-accordion-track">
           <header className="details-booklet-cover" data-booklet-page="0">
-            <span>The accordion book</span>
+            <span>The accordion booklet</span>
             <div>
               <h1>{experience.details.title}</h1>
               <p>{experience.details.heading}</p>
@@ -59,10 +59,9 @@ export function DetailsCollection() {
             >
               <div className="detail-note__number">{entry.number}</div>
               <div className="detail-note__rule" />
-              <p className="archive-label">{entry.category}</p>
-              <h2>{entry.label}</h2>
+              <h2>{entry.title}</h2>
               <p className="detail-note__body">{entry.body}</p>
-              <p className="detail-note__emphasis">{entry.emphasis}</p>
+              <p className="detail-note__emphasis">{entry.closing}</p>
               <span className="detail-note__edition">Page {entryIndex + 1} of {entries.length}</span>
             </article>
           ))}

@@ -1,83 +1,90 @@
 # Seven-Tag NFC Installation Guide
 
-The tags contain standard NDEF HTTPS URL records. The phone’s operating system reads a tag and opens the URL; the website does not use Web NFC and cannot tell whether a visit came from a scan or a normal link.
+Each tag contains one standard NDEF HTTPS URL record. The phone’s operating system reads it and opens the route; the website does not use Web NFC and cannot distinguish a scan from a normal visit.
 
 ## Destinations and placement
 
 | Tag | Physical placement | URL path |
 | --- | --- | --- |
 | 01 | Inside lid of the small wooden key box | `/invite` |
-| 02 | Behind the Tomorrow art print | `/collection/tomorrow` |
-| 03 | Beneath the iris housing, clear of moving parts | `/collection/in-focus` |
-| 04 | On or inside a non-metallic area of the shell-inspired container | `/collection/the-promise` |
+| 02 | Inside or behind the miniature camera body | `/collection/the-archive` |
+| 03 | Beneath the iris housing, clear of moving parts | `/collection/the-way-out` |
+| 04 | On or inside a non-metallic area of the shell container | `/collection/the-promise` |
 | 05 | Behind the miniature accordion booklet | `/collection/the-details` |
-| 06 | Beneath the waveform plaque | `/collection/my-voice` |
+| 06 | Beneath the sound-wave plaque | `/collection/my-voice` |
 | 07 | Concealed inside the Only You credential | `/access/YOUR_PRIVATE_TOKEN` |
 
-The ordinary artifacts can be scanned in any order. Tag 07 does not depend on chapter completion or audio playback.
+The public artifacts can be scanned in any order. Tag 07 does not depend on visiting another chapter or playing the recording.
 
 ## Choose suitable tags
 
-Use genuine NTAG213, NTAG215, or NTAG216 stickers from a reputable supplier. These URLs fit comfortably on NTAG213, while NTAG215/216 provide additional capacity. Small round stickers are convenient, but antenna size affects scan range: use the largest tag the object can hide cleanly.
+Use genuine NTAG213, NTAG215, or NTAG216 stickers from a reputable supplier. These URLs fit on NTAG213; the larger models add capacity. Antenna size matters more than memory here, so use the largest tag the object can hide cleanly.
 
-Standard tags perform poorly against metal, conductive foil, carbon-filled material, or metal-pigmented paint. Use an on-metal/ferrite-backed tag if placement near conductive material cannot be avoided. PLA, PETG, paper, and dry wood are usually radio-transparent, but thickness and pigment vary—test the actual assembly.
+Ordinary tags perform poorly against metal, conductive foil, carbon-filled material, metal-pigmented paint, and some metallic filaments. Use ferrite-backed/on-metal tags when separation is impossible. PLA, PETG, paper, and dry wood are normally radio-transparent, but thickness and pigment vary—test the finished materials.
 
-## Generate exact URLs
+## Generate the exact URLs
 
-Set the final production origin and private token in `.env.local`, then run:
+Set the production origin and private token in `.env.local`:
+
+```env
+NEXT_PUBLIC_SITE_URL=https://site-pink-ten-14.vercel.app
+PRIVATE_ACCESS_TOKEN=your-long-random-token
+```
+
+Then run:
 
 ```bash
 npm run nfc:links
 npm run nfc:links -- --include-private
 ```
 
-The normal command prints Tags 01–06. The explicit private flag is required for Tag 07. Do not save or commit the private output.
+The normal command prints Tags 01–06. The explicit flag is required for Tag 07. Never save, screenshot, or commit the private output.
 
-## Program each tag
+## Write each tag
 
-1. Install a reputable NFC writing application on iPhone or Android.
-2. Choose **Write**, add a **URL/URI** record, and paste one complete generated HTTPS URL.
-3. Do not add a contact card, plain-text record, app deep link, or Web NFC payload.
-4. Hold the phone at the tag’s antenna location until the app reports that writing completed.
-5. Re-scan in the app’s read mode and verify the NDEF record contains exactly one intended HTTPS URL.
-6. Lock a tag read-only only after the production domain and route have been tested. A locked tag cannot be corrected later.
+1. Install a reputable NFC-writing app on iPhone or Android.
+2. Choose **Write**, then add one **URL/URI** record.
+3. Paste the complete generated HTTPS URL. Do not add a contact card, plain-text record, app deep link, or Web NFC payload.
+4. Hold the phone at the tag’s antenna until writing completes.
+5. Read the tag in the app and verify exactly one NDEF URL record with the intended path.
+6. Lock it read-only only after the production domain and assembled object have been tested. Locking is permanent.
 
 ## Test on iPhone
 
-1. Wake and unlock a recent iPhone; no NFC app should be required for background URL reading.
-2. Bring the top edge/back of the phone slowly toward the tag and pause for one to two seconds.
-3. Tap the system notification.
-4. Confirm Safari opens the correct direct route, refresh succeeds, and browser Back works.
-5. Repeat through the final object material and note the most reliable scan position.
+1. Wake and unlock a current iPhone; a separate app should not be necessary for background URL reading.
+2. Move the top edge/back of the phone slowly over the object and pause for one to two seconds.
+3. Tap the system notification and confirm Safari opens the exact canonical route.
+4. Refresh, navigate back, and scan again.
+5. Repeat through the final object with the normal phone case installed.
 
 ## Test on Android
 
 1. Confirm NFC is enabled in system settings.
 2. Wake and unlock the phone.
-3. Move the rear antenna area—often near the upper or central back—slowly over the tag.
-4. Open the system prompt and confirm Chrome or the chosen browser reaches the exact route.
-5. Test at least one additional Android device if available because antenna positions differ.
+3. Move the rear antenna area—often near the upper or middle back—slowly over the tag.
+4. Open the system prompt and confirm the correct route in Chrome or the chosen browser.
+5. Test a second Android model if possible because antenna positions differ.
 
 ## Install and retest
 
-- Tag 01: test through the actual wooden lid before adhesive is permanent.
-- Tag 02: protect the print surface; avoid metallic photo backing or foil mounts.
-- Tag 03: keep the tag outside the rotating mechanism and away from metal fasteners.
-- Tag 04: use a non-metallic section or ferrite-backed tag. Metallic pigment can reduce range even in printed plastic.
-- Tag 05: keep adhesive from telegraphing through thin paper; test through all folded layers.
-- Tag 06: center the tag beneath a thin, clearly understood scan area.
-- Tag 07: test through the fully assembled credential, including gold finish and laminate.
+- Tag 01: test through the actual wooden lid before permanent adhesive.
+- Tag 02: keep it away from metal camera details and test through the complete PETG thickness.
+- Tag 03: keep it outside the rotating mechanism and away from fasteners.
+- Tag 04: use a non-metallic section or ferrite-backed tag; metallic gold pigment may reduce range.
+- Tag 05: avoid telegraphing the sticker through the paper and test through every folded layer.
+- Tag 06: place it under a thin, repeatable scan area of the plaque.
+- Tag 07: test through the complete credential, including laminate and gold finish.
 
-Mark scan locations discreetly only where needed—a tiny engraved line, dot, or reverse-side cue is enough. After final assembly, test every tag on both platforms, with the phone case on and off, and from several approach angles.
+Mark scan areas only when needed; a tiny reverse-side dot or engraved line is enough. After final assembly, retest every tag on iPhone and Android, with cases on and off and from several approach angles.
 
-## If a scan fails
+## If scanning fails
 
-1. Test the bare tag outside the object.
-2. Confirm the tag still reads and the NDEF URL is correct.
+1. Read the bare tag outside the object.
+2. Verify the NDEF record and full HTTPS URL.
 3. Reduce material thickness or move the tag closer to the surface.
-4. Increase distance from metal, magnets, wiring, or conductive finishes.
-5. Try a larger antenna or ferrite-backed/on-metal tag.
-6. Check the phone’s antenna position and remove a metal or magnetic case.
-7. Re-test before gluing the object closed.
+4. Increase separation from metal, magnets, conductive finishes, and fasteners.
+5. Try a larger antenna or ferrite-backed tag.
+6. Find the phone’s antenna location and remove magnetic/metal cases.
+7. Retest before sealing the object.
 
-If the production domain changes, regenerate all destinations, rewrite every unlocked tag, and repeat direct-link and assembled-object testing. Do not assume a redirect will be permanent enough for a keepsake.
+If the production domain changes, regenerate and rewrite every unlocked tag. Do not rely on legacy redirects as a permanent keepsake strategy.

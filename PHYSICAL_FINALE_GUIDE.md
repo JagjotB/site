@@ -6,10 +6,10 @@ The digital finale should end quietly at “Lift the tray.” Beneath the remova
 
 The handwritten letter can move through:
 
-1. Meeting at Weldon Library and how an ordinary place gained significance.
+1. The escape-room first date and why that beginning still makes you smile.
 2. What the last two years have meant, using only true shared details.
 3. Why a handmade collection felt like the right way to do this properly.
-4. The future you would like to explore without presuming her choices.
+4. The time and experiences you would like to share without presuming her choices.
 5. The consistency, effort, respect, and dependability you intend to bring.
 6. Mutual consideration expressed as a hope, not a list of conditions.
 

@@ -1,21 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Sans, Newsreader } from "next/font/google";
+import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./authentic.css";
 
-const editorial = Newsreader({
+const editorial = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-editorial",
   display: "swap",
-  weight: "variable",
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
-  axes: ["opsz"],
 });
 
-const modern = IBM_Plex_Sans({
+const modern = Manrope({
   subsets: ["latin"],
   variable: "--font-modern",
   display: "swap",
-  weight: "variable",
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
