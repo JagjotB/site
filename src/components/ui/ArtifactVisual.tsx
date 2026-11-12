@@ -50,13 +50,35 @@ export function ArtifactVisual({ slug }: ArtifactVisualProps) {
   if (slug === "the-promise") {
     return (
       <svg viewBox="0 0 280 220" className="artifact-visual" aria-hidden="true">
-        <g transform="rotate(-7 140 110)">
-          <rect x="54" y="81" width="172" height="58" rx="28" fill="#111315" stroke="#77736d" strokeOpacity=".48" />
-          <path d="M183 81h18c16 0 29 13 29 29s-13 29-29 29h-18Z" fill="#9e855f" />
-          <path d="M190 87v46M200 85v50M210 89v42" stroke="#151719" strokeOpacity=".42" />
-          <circle cx="76" cy="110" r="18" fill="#191b1d" stroke="#c8ab7a" strokeOpacity=".22" />
-          <path d="M77 81c-2-21 8-34 27-39 10 14 9 27-2 39" fill="#eee4d6" stroke="#866243" strokeOpacity=".44" />
-          <path d="M85 58h16M85 64h13M85 70h15" stroke="#866243" strokeOpacity=".5" />
+        <defs>
+          <linearGradient id="shell-hull" x1="0" y1="0" x2="1" y2="0">
+            <stop stopColor="#070809" />
+            <stop offset=".32" stopColor="#242729" />
+            <stop offset=".58" stopColor="#111315" />
+            <stop offset="1" stopColor="#050606" />
+          </linearGradient>
+          <linearGradient id="shell-brass" x1="0" y1="0" x2="1" y2="0">
+            <stop stopColor="#6f5a3d" />
+            <stop offset=".28" stopColor="#c8ab7a" />
+            <stop offset=".53" stopColor="#927550" />
+            <stop offset=".78" stopColor="#d1b886" />
+            <stop offset="1" stopColor="#665139" />
+          </linearGradient>
+        </defs>
+        <ellipse cx="142" cy="202" rx="53" ry="9" fill="#000" fillOpacity=".32" />
+        <g transform="rotate(8 140 111)">
+          <path d="M108 31c0-7 5.7-12.5 12.7-12.5h38.6c7 0 12.7 5.5 12.7 12.5v128h-64Z" fill="url(#shell-hull)" stroke="#6f6d68" strokeOpacity=".5" strokeWidth="1.2" />
+          <ellipse cx="140" cy="30" rx="32" ry="11.5" fill="#151719" stroke="#817b72" strokeOpacity=".5" />
+          <path d="M140 30 112 25M140 30l-19-9M140 30l.2-11.5M140 30l19-9M140 30l28-5M140 30l-25 6M140 30l13 8M140 30l26 5" stroke="#8e8a82" strokeOpacity=".38" strokeWidth="1" />
+          <path d="M113 42h54M113 47h54" stroke="#c8ab7a" strokeOpacity=".11" />
+          <path d="M118 53v91M124 50v96M156 50v96M162 53v91" stroke="#f1e8da" strokeOpacity=".035" />
+          <text x="140" y="119" fill="#c8ab7a" fillOpacity=".68" fontFamily="var(--sans)" fontSize="9" letterSpacing="2.4" textAnchor="middle">12 GA</text>
+          <path d="M121 127h38" stroke="#c8ab7a" strokeOpacity=".15" />
+          <rect x="108" y="153" width="64" height="39" fill="url(#shell-brass)" stroke="#d5bc8d" strokeOpacity=".55" />
+          <path d="M114 156v33M120 155v35M127 155v35M134 155v35M141 155v35M148 155v35M155 155v35M162 155v35M168 156v33" stroke="#33291d" strokeOpacity=".34" />
+          <rect x="103" y="188" width="74" height="10" rx="2" fill="url(#shell-brass)" stroke="#d7be8f" strokeOpacity=".65" />
+          <ellipse cx="140" cy="197" rx="37" ry="7.5" fill="#8c704c" stroke="#d7be8f" strokeOpacity=".65" />
+          <ellipse cx="140" cy="197" rx="7" ry="3.2" fill="#3c3023" stroke="#c8ab7a" strokeOpacity=".55" />
         </g>
       </svg>
     );

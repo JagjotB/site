@@ -21,9 +21,9 @@ function readPrivateToken(): string | undefined {
 test("invitation opens the collection without a digital key gate", async ({ page }) => {
   await page.goto("/invite");
   await expect(page.getByText("Private Edition · 01/01")).toBeVisible();
+  await expect(page.getByRole("img", { name: "A tall man and a woman in an elegant formal twirl" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "The Art of Us" })).toBeVisible();
   await expect(page.getByText("I made this for you.")).toBeVisible();
-  await expect(page.getByRole("img", { name: /pagg twirling a woman/i })).toBeVisible();
   await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href", /icon\.svg/);
   await expect(page.getByRole("button", { name: /turn the key/i })).toHaveCount(0);
   await page.getByRole("link", { name: "View the Collection" }).click();
