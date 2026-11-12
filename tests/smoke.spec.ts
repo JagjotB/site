@@ -47,8 +47,10 @@ test("all six public NFC destinations support meaningful direct entry", async ({
 
   await page.goto("/collection/the-archive");
   await expect(page.getByRole("heading", { name: "The Archive", level: 1 })).toBeVisible();
-  await expect(page.getByText("The first frame is still waiting.")).toBeVisible();
-  await expect(page.getByRole("link", { name: /Open Our Album/ })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: /Open Our Album/ })).toHaveAttribute(
+    "href",
+    "https://drive.google.com/drive/folders/1kcw2uINgindiSE0dr1f_kh4-2vthldg3?usp=drive_link",
+  );
 
   await page.goto("/collection/the-way-out");
   await expect(page.getByRole("heading", { name: "The Way Out" })).toBeVisible();
@@ -72,10 +74,13 @@ test("all six public NFC destinations support meaningful direct entry", async ({
 });
 
 test("The Archive enables only a configured album link", async ({ page }) => {
-  await page.goto("/collection/the-archive?albumFixture=1");
+  await page.goto("/collection/the-archive");
   const album = page.getByRole("link", { name: /Open Our Album/ });
   await expect(album).toBeVisible();
-  await expect(album).toHaveAttribute("href", "https://photos.google.com/share/test-album");
+  await expect(album).toHaveAttribute(
+    "href",
+    "https://drive.google.com/drive/folders/1kcw2uINgindiSE0dr1f_kh4-2vthldg3?usp=drive_link",
+  );
   await expect(album).toHaveAttribute("target", "_blank");
 });
 

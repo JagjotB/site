@@ -15,13 +15,13 @@ Do not add invented habits, inside jokes, travel memories, or feelings attribute
 
 ## The Archive shared album
 
-Create a real shared Google Photos album and paste its public share URL into `src/content/assets.ts`:
+The camera artifact currently opens the shared Google Drive folder configured in `src/content/assets.ts`:
 
 ```ts
-sharedAlbumUrl: "https://photos.app.goo.gl/your-real-share-code",
+sharedAlbumUrl: "https://drive.google.com/drive/folders/your-folder-id?usp=drive_link",
 ```
 
-Until this is configured, The Archive intentionally shows that its first frame is waiting. The application neither creates nor synchronizes an album. Confirm the link opens in a private/incognito browser before presentation so it does not depend on your signed-in Google session.
+The application links to the folder; it does not upload, copy, or synchronize photographs. In Google Drive, set the folder’s General access to **Anyone with the link · Viewer**, then confirm the link opens in a private/incognito browser so it does not depend on your signed-in Google session. If the URL is removed from `assets.ts`, The Archive returns to its intentional first-frame waiting state.
 
 ## Details booklet
 
