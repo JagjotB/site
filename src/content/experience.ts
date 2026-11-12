@@ -98,12 +98,10 @@ export const experience = {
   final: {
     label: "Private Edition · 01/01",
     title: "Only You.",
-    prelude: "There is one part of this collection that was never meant to stay on a screen.",
-    collectionLine: "It is in the box, where it should be.",
+    prelude: "There’s one last thing I wanted you to have.",
     action: "Show me where",
-    instruction: "Back to the box.",
+    instruction: "THE FINAL PIECE",
     command: "Lift the tray.",
     detail: "There’s something underneath.",
-    closing: "The rest is yours to discover.",
   },
 } as const;

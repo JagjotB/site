@@ -1,14 +1,15 @@
-type MonogramProps = {
-  className?: string;
-};
+import type { SVGProps } from "react";
 
-export function Monogram({ className }: MonogramProps) {
+type MonogramProps = SVGProps<SVGSVGElement>;
+
+export function Monogram({ className, ...props }: MonogramProps) {
   return (
     <svg
       className={className}
       viewBox="0 0 80 80"
       role="img"
       aria-label="A tall man and a woman in an elegant formal twirl"
+      {...props}
     >
       <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="25.5" cy="9.5" r="3.7" fill="currentColor" stroke="none" />

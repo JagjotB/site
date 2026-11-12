@@ -1,4 +1,5 @@
 import type { ArtifactSlug } from "@/content/experience";
+import { Monogram } from "@/components/ui/Monogram";
 
 type ArtifactVisualProps = { slug: ArtifactSlug };
 
@@ -117,11 +118,9 @@ export function ArtifactVisual({ slug }: ArtifactVisualProps) {
       <g transform="rotate(3 140 110)">
         <rect x="52" y="62" width="176" height="96" rx="4" fill="#111315" stroke="#827057" strokeOpacity=".55" />
         <path d="M70 82h140M70 138h140" stroke="#9e855f" strokeOpacity=".25" />
-        <g transform="translate(98 86) scale(.66)" stroke="#c8ab7a" fill="none">
-          <path d="M11 17h42M11 47h42M17 14v36M28 21v26M40 14v36M48 24v23M28 21l12-7" strokeWidth="1.4" />
-          <circle cx="48" cy="20" r="2.3" fill="#c8ab7a" />
-        </g>
-        <text x="70" y="150" fill="#b8afa2" fontFamily="var(--sans)" fontSize="6" letterSpacing="2">ONLY YOU</text>
+        <Monogram x="70" y="84" width="52" height="52" style={{ color: "#c8ab7a" }} aria-hidden="true" />
+        <text x="137" y="113" fill="#f1e8da" fontFamily="var(--serif)" fontSize="15">Only You.</text>
+        <text x="138" y="127" fill="#b8afa2" fontFamily="var(--sans)" fontSize="5.5" letterSpacing="1.2">PRIVATE EDITION · 01/01</text>
       </g>
     </svg>
   );

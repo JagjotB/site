@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { experience } from "@/content/experience";
 import { GoldButton } from "@/components/ui/GoldButton";
@@ -32,10 +32,7 @@ function CredentialMark() {
         <rect x="32" y="34" width="256" height="142" rx="8" fill="#08090a" opacity=".52" transform="translate(0 8)" />
         <rect x="32" y="34" width="256" height="142" rx="8" fill="url(#credential-face)" stroke="url(#credential-edge)" strokeOpacity=".82" />
         <path d="M51 53h218M51 157h218" stroke="#c8ab7a" strokeOpacity=".16" />
-        <g transform="translate(64 69)" fill="none" stroke="#c8ab7a">
-          <path d="M0 0h58M0 42h58M8-4v50M23 6v36M40-4v50M51 13v29M23 6 40-4" strokeWidth="1.5" />
-          <circle cx="51" cy="7" r="3" fill="#572a38" stroke="none" />
-        </g>
+        <Monogram x="53" y="65" width="72" height="72" style={{ color: "#c8ab7a" }} aria-hidden="true" />
         <text x="154" y="93" fill="#f1e8da" fontFamily="var(--serif)" fontSize="22">
           Only You.
         </text>
@@ -93,14 +90,8 @@ function TrayIllustration({ lifted }: { lifted: boolean }) {
 }
 
 export function FinalReveal() {
-  const [stage, setStage] = useState<"intro" | "tray" | "settled">("intro");
+  const [stage, setStage] = useState<"intro" | "tray">("intro");
   const reduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    if (stage !== "tray") return;
-    const timer = window.setTimeout(() => setStage("settled"), reduceMotion ? 300 : 3600);
-    return () => window.clearTimeout(timer);
-  }, [stage, reduceMotion]);
 
   return (
     <section className="final-reveal">
@@ -115,7 +106,6 @@ export function FinalReveal() {
             </header>
             <div className="final-intro__object">
               <CredentialMark />
-              <p className="final-intro__line">{experience.final.collectionLine}</p>
               <GoldButton type="button" onClick={() => setStage("tray")}>{experience.final.action}</GoldButton>
             </div>
           </motion.div>
@@ -127,9 +117,6 @@ export function FinalReveal() {
               <h2>{experience.final.command}</h2>
               <span>{experience.final.detail}</span>
             </motion.div>
-            <motion.p className="final-settled" animate={{ opacity: stage === "settled" ? 1 : 0 }} aria-hidden={stage !== "settled"}>
-              {experience.final.closing}
-            </motion.p>
           </motion.div>
         )}
       </AnimatePresence>

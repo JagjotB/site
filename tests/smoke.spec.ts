@@ -137,10 +137,15 @@ test("private access rejects invalid links and accepts the configured token", as
   }
   await page.goto(`/access/${token}`);
   await expect(page.getByRole("heading", { name: "Only You." })).toBeVisible();
+  await expect(page.getByText("There’s one last thing I wanted you to have.")).toBeVisible();
+  await expect(page.locator(".final-intro")).toHaveCSS("opacity", "1");
   await page.screenshot({ path: testInfo.outputPath(`private-intro-${testInfo.project.name}.png`), fullPage: true });
   await page.getByRole("button", { name: "Show me where" }).click();
+  await expect(page.getByText("THE FINAL PIECE", { exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Lift the tray." })).toBeVisible();
-  await expect(page.locator(".final-settled")).toHaveCSS("opacity", "1", { timeout: 6_000 });
+  await expect(page.getByText("There’s something underneath.")).toBeVisible();
+  await expect(page.locator(".tray-copy")).toHaveCSS("opacity", "1", { timeout: 4_000 });
+  await page.screenshot({ path: testInfo.outputPath(`private-reveal-${testInfo.project.name}.png`), fullPage: true });
 });
 
 test("public pages and production bundles do not expose the private token", async ({ page }) => {
