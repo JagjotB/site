@@ -40,25 +40,26 @@ The web entries should complement the handmade booklet rather than copy it word 
 
 ## Voice recording: for later
 
-Recommended asset:
+Current asset:
 
-- Path: `public/media/voice/private-recording.mp3`
-- Format: MP3 for broad compatibility; AAC in M4A is also suitable for current iPhone and Android browsers.
-- Duration: approximately 20–40 seconds.
+- Path: `public/media/voice/private-recording.m4a`
+- Format: AAC in M4A for current iPhone and Android browsers.
+- Duration: 1 minute 47 seconds.
+- Source: mono, 48 kHz, approximately 65 kbps.
 - Audio: natural, close, conversational; no music is required.
 - Target size: under 2 MB.
 
 Configure it in `src/content/assets.ts`:
 
 ```ts
-voiceRecording: "/media/voice/private-recording.mp3",
+voiceRecording: "/media/voice/private-recording.m4a",
 ```
 
 The page then adds the secondary `Listen When You’re Ready` action and the genuine player. Playback never autostarts. Sharing or copying preserves the page URL; it does not download or guarantee offline access.
 
 ### Match the physical waveform
 
-After the recording is final, export 30–80 normalized waveform amplitudes from 8–100 and set:
+The configured 64-value waveform was derived from the real M4A using RMS amplitude sampling. If the recording changes, derive a new 30–80 value profile normalized from 8–100 and set:
 
 ```ts
 voiceWaveform: [18, 24, 36, 62, 45, 78, 54, 31],

@@ -68,7 +68,7 @@ test("all six public NFC destinations support meaningful direct entry", async ({
   await page.goto("/collection/my-voice");
   await expect(page.getByText("The sound-wave plaque")).toBeVisible();
   await expect(page.getByRole("button", { name: "Keep This Message" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Listen When You’re Ready" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Listen When You’re Ready" })).toBeVisible();
 });
 
 test("The Archive enables only a configured album link", async ({ page }) => {
@@ -107,11 +107,13 @@ test("cancelled share is not reported as saved", async ({ page }) => {
   await expect(page.getByText(/Yours whenever you’re ready/)).toHaveCount(0);
 });
 
-test("development audio fixture exposes the real player without autoplay", async ({ page }) => {
-  await page.goto("/collection/my-voice?audioFixture=1");
+test("configured recording exposes the real player without autoplay", async ({ page }) => {
+  await page.goto("/collection/my-voice");
   await page.getByRole("button", { name: "Listen When You’re Ready" }).click();
   await expect(page.getByRole("region", { name: "Private recording player" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Play recording" })).toBeVisible();
+  await expect(page.locator("audio")).toHaveAttribute("src", "/media/voice/private-recording.m4a");
+  await expect.poll(() => page.locator("audio").evaluate((audio) => (audio as HTMLAudioElement).duration)).toBeGreaterThan(100);
   expect(await page.locator("audio").evaluate((audio) => !(audio as HTMLAudioElement).autoplay)).toBe(true);
 });
 
