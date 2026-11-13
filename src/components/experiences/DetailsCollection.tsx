@@ -54,7 +54,6 @@ export function DetailsCollection() {
           >
             <span>{experience.details.label}</span>
             <div>
-              <span className="details-booklet-cover__purpose">{panels[0].purpose}</span>
               <h1>{panels[0].heading}</h1>
               <p>{panels[0].message}</p>
             </div>
@@ -74,7 +73,6 @@ export function DetailsCollection() {
               >
                 <div className="detail-note__number">{panel.number}</div>
                 <div className="detail-note__rule" />
-                <p className="detail-note__purpose">{panel.purpose}</p>
                 <h2>{panel.heading}</h2>
                 <p className="detail-note__body">{panel.message}</p>
                 <span className="detail-note__edition">Panel {pageIndex + 1} of {panels.length}</span>

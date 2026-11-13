@@ -91,6 +91,12 @@ test("The Details presents the approved six-panel accordion", async ({ page }, t
   await expect(page.locator("[data-booklet-page]")).toHaveCount(6);
   await expect(page.getByRole("heading", { name: "THE DETAILS" })).toBeVisible();
   await expect(page.getByText("Panel 1 of 6", { exact: true })).toBeVisible();
+  await expect(page.getByText("Things I notice but don’t say much.")).toBeVisible();
+  await expect(page.getByText("I love that when you look up at me, there is a sparkle in your eye.")).toBeVisible();
+  await expect(page.getByText("Even in tough situations, you’re always by my side with lots of positivity.")).toBeVisible();
+  await expect(page.getByText("Our first date was not awkward — I felt like I already had a bond with you.")).toBeVisible();
+  await expect(page.getByText("You always make me laugh.")).toBeVisible();
+  await expect(page.getByText("I see you being a part of it.")).toBeVisible();
 
   const headings = ["THE LITTLE THINGS", "WHAT I ADMIRE", "A MEMORY", "YOUR HUMOUR", "THE FUTURE"];
   const next = page.getByRole("button", { name: "Next panel" });

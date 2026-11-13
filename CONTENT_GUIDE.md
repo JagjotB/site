@@ -6,7 +6,7 @@ Recipient-facing wording lives in `src/content/experience.ts`. Optional media an
 
 Review these fields in `experience.ts`:
 
-1. `details.panels[*].message`: replace the six neutral placeholders with the final approved wording when ready.
+1. `details.panels[*].message`: review the six messages transcribed from the physical accordion photographs.
 2. `promise.paragraphs`, `promise.signature`, and `promise.physicalNote`: make sure the wording sounds natural when spoken by you.
 3. `voice`: keep the invitation quiet and free of any pressure to listen during the presentation.
 4. Invitation and final-reveal wording only if the physical choreography changes.
@@ -25,7 +25,7 @@ The application links to the folder; it does not upload, copy, or synchronize ph
 
 ## Details booklet
 
-Chapter 04 always contains exactly six accordion panels. Their approved headings and purposes live in `experience.details.panels`; normally you only need to replace each `message` value:
+Chapter 04 contains exactly six accordion panels. Their headings, purposes, and transcribed physical-booklet messages live in `experience.details.panels`; edit a `message` value whenever the handwritten copy changes:
 
 ```ts
 {
@@ -33,7 +33,7 @@ Chapter 04 always contains exactly six accordion panels. Their approved headings
   number: "II",
   heading: "THE LITTLE THINGS",
   purpose: "Something small I notice about her",
-  message: "Replace this placeholder with the final message."
+  message: "I love that when you look up at me, there is a sparkle in your eye."
 }
 ```
 

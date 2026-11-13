@@ -71,12 +71,12 @@ export const experience = {
     label: "The accordion booklet",
     footer: "Private edition · six panels",
     panels: [
-      { id: "cover", number: "I", heading: "THE DETAILS", purpose: "Cover", message: "Your opening message will appear here." },
-      { id: "little-things", number: "II", heading: "THE LITTLE THINGS", purpose: "Something small I notice about her", message: "Your final wording will appear here." },
-      { id: "admire", number: "III", heading: "WHAT I ADMIRE", purpose: "A quality I respect", message: "Your final wording will appear here." },
-      { id: "memory", number: "IV", heading: "A MEMORY", purpose: "A meaningful experience together", message: "Your final wording will appear here." },
-      { id: "humour", number: "V", heading: "YOUR HUMOUR", purpose: "Something I appreciate about how funny she is", message: "Your final wording will appear here." },
-      { id: "future", number: "VI", heading: "THE FUTURE", purpose: "My thoughts about a possible long-term future together", message: "Your final wording will appear here." },
+      { id: "cover", number: "I", heading: "THE DETAILS", purpose: "Cover", message: "Things I notice but don’t say much." },
+      { id: "little-things", number: "II", heading: "THE LITTLE THINGS", purpose: "Something small I notice about her", message: "I love that when you look up at me, there is a sparkle in your eye." },
+      { id: "admire", number: "III", heading: "WHAT I ADMIRE", purpose: "A quality I respect", message: "Even in tough situations, you’re always by my side with lots of positivity." },
+      { id: "memory", number: "IV", heading: "A MEMORY", purpose: "A meaningful experience together", message: "Our first date was not awkward — I felt like I already had a bond with you." },
+      { id: "humour", number: "V", heading: "YOUR HUMOUR", purpose: "Something I appreciate about how funny she is", message: "You always make me laugh." },
+      { id: "future", number: "VI", heading: "THE FUTURE", purpose: "My thoughts about a possible long-term future together", message: "I see you being a part of it." },
     ] satisfies DetailPanel[],
   },
   voice: {
